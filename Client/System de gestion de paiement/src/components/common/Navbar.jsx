@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/newl.png'
 
-const Navbar = () => {
+const Navbar = ({to}) => {
+
+    // const [login, setLogin]=useState(false);
+    // const [register, setRegister]=useState(false);
+
+
+    // const updateLogin = ()=>{
+    //     setLogin(true);
+    //     setRegister(false);
+
+
+    // }
+
+    // const updateRegister = ()=>{
+    //     setLogin(false);
+    //     setRegister(true);
+
+
+    // }
   return (
     <div>
         <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-2xl  bg-opacity-0">
@@ -43,12 +61,12 @@ const Navbar = () => {
 
         
             
-                <button className="bg-text-blue md:text-white  text-brand px-3 py-2 rounded-xl w-max-content transform scale-100 hover:scale-110 transition-transform">
+                <button onClick={()=>to('login')} className="bg-lime-900 md:text-white  text-brand px-3 py-2 rounded-xl w-max-content transform scale-100 hover:scale-110 transition-transform">
                   Login
                 </button>
           
            
-                <button className="bg-text-blue text-white px-3 py-2 rounded-xl w-max-content shadow transform scale-100 hover:scale-110 transition-transform">
+                <button onClick={()=>to('register')} className="bg-lime-900 text-white px-3 py-2 rounded-xl w-max-content shadow transform scale-100 hover:scale-110 transition-transform">
                   Sign Up
                 </button>
      
