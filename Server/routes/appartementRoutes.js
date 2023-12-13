@@ -6,7 +6,7 @@ const appartementController = require('../conrollers/appartementController');
 
 
 router.post('/addAppartement',appartementController.insertAppartement);
-
+router.get('/showAppartement',appartementController.showAppartement);
 
 
 module.exports=router;

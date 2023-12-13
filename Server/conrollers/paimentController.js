@@ -5,31 +5,27 @@ const Appartement = require('../models/appartement')
 
 const insertPaiment = async (req,res)=>{
        
-        const { clientId, appartementId, date, prixParMois} = req.body;
+        const { appartementId, date, prixParMois} = req.body;
 
       
 
-        if (!validator.isLength(clientId, { min: 1, max: 255 })) {
-            return res.status(400).json({ error: 'Le client est requis.' });
-        }
+       
     
         if (!validator.isLength(appartementId, { min: 1, max: 600 })) {
             return res.status(400).json({ error: 'Appartement est requis' });
         }
      
-       
-       console.log(req);
 
       
         try {
-            const client1 = await client.findOne({ name :clientId });
-            console.log(client1);
+            // const client1 = await client.findOne({ name :clientId });
+            // console.log(client1);
         
-            if (!client1) {
-                return res.status(400).json({ err: "This client doesn't exist" })
-            }
+            // if (!client1) {
+            //     return res.status(400).json({ err: "This client doesn't exist" })
+            // }
         
-            const clientId1 = client1._id;
+            // const clientId1 = client1._id;
         
             const Appartement1 = await Appartement.findOne({ name : appartementId });
         
@@ -38,6 +34,7 @@ const insertPaiment = async (req,res)=>{
             }
 
             const paimentId1 = Appartement1._id;
+            const clientId1 = Appartement1.clientId;
         
             const newPaiment = new Paiment({
                 clientId: clientId1,
@@ -58,9 +55,31 @@ const insertPaiment = async (req,res)=>{
 
    }
 
+
+const showPaiment = async(req,res)=>{
+    const id1 = req.params.id1;
+    console.log(id1);
+    const findResideClient = await Appartement.findOne({_id:id1});
+    console.log(findResideClient);
+    const idClient = findResideClient.clientId;
+    const appartementPaiments = await Paiment.find({appartementId:id1,clientId:idClient}).populate({
+        path: "clientId",
+        module: "client",
+        select: "name"
+    }).populate({
+        path: "appartementId",
+        module: "Appartement",
+        select: "name"
+    })
+
+    return res.status(200).json({ success: true, appartementPaiments: appartementPaiments })
+
+}
+
 module.exports={
   
-    insertPaiment
+    insertPaiment,
+    showPaiment
    
 };
 

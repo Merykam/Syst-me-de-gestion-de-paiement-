@@ -89,9 +89,23 @@ const insertAppartement = async (req,res)=>{
 
    }
 
+
+const showAppartement = async(req,res)=>{
+
+    const allApartementsWithHisClients = await Appartement.find().populate({
+        path: "clientId",
+        module: "client",
+        select: "name"
+    })
+
+    return res.status(200).json({ success: true, appartements: allApartementsWithHisClients })
+
+}
+
 module.exports={
   
-    insertAppartement
+    insertAppartement,
+    showAppartement
    
 };
 
