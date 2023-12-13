@@ -4,6 +4,9 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const userRoute = require('./routes/authRoutes');
+const clientRoute = require('./routes/clientRoutes');
+const appartementRoute = require('./routes/appartementRoutes');
+const paimentRoutes = require('./routes/paimentRoutes');
 const cors = require('cors');
 
 app.use(cookieParser());
@@ -35,3 +38,6 @@ app.use(cors({
 
 
 app.use('/api/auth',userRoute);
+app.use('/api/client',clientRoute);
+app.use('/api/appartement',appartementRoute);
+app.use('/api/paiment',paimentRoutes);

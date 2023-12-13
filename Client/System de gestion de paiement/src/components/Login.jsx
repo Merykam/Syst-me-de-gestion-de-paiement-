@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-
+import Routes from '../components/Routes'
+import Dashboard from './Dashboard';
 const Login = () => {
   
    
@@ -27,11 +28,15 @@ const Login = () => {
           console.log(formData)
           const response = await axios.post('http://localhost:8000/api/auth/signin', formData);
           console.log(response.data);
-          if(response.data.message){
-              setSuccessMessage(response.data.message);
-              navigate('/dashboard');
+          if(response.data){
+            
+            
+               navigate('/dashboard');
+
+             
 
           }
+         
       
 
 
