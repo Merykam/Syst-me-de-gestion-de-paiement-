@@ -8,9 +8,6 @@ const insertPaiment = async (req,res)=>{
         const { appartementId, date, prixParMois} = req.body;
 
       
-
-       
-    
         if (!validator.isLength(appartementId, { min: 1, max: 600 })) {
             return res.status(400).json({ error: 'Appartement est requis' });
         }

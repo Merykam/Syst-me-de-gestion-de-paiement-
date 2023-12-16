@@ -39,7 +39,7 @@ const insertAppartement = async (req,res)=>{
             console.log(client1);
         
             if (!client1) {
-                // return res.status(400).json({ err: "This client doesn't exist" });
+                
 
                 const newAppartement = new Appartement({
                     name: req.body.name,

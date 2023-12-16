@@ -3,23 +3,7 @@ import logo from '../../assets/newl.png'
 
 const Navbar = ({to}) => {
 
-    // const [login, setLogin]=useState(false);
-    // const [register, setRegister]=useState(false);
-
-
-    // const updateLogin = ()=>{
-    //     setLogin(true);
-    //     setRegister(false);
-
-
-    // }
-
-    // const updateRegister = ()=>{
-    //     setLogin(false);
-    //     setRegister(true);
-
-
-    // }
+  
   return (
     <div>
         <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-2xl  bg-opacity-0">
@@ -31,32 +15,9 @@ const Navbar = ({to}) => {
           alt=""
           srcset=""
         />
-        <button
-          data-collapse-toggle="navbar-default"
-          type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-default"
-          aria-expanded="false"
-        >
-          <span className="sr-only">Open main menu</span>
-          <svg
-            className="w-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
-          </svg>
-        </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex  flex-col  md:p-0  border items-center  rounded-xl bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+    
+        <div className="  md:block md:w-auto" id="navbar-default">
+          <ul className="font-medium flex  flex-col  md:p-0  items-center  rounded-xl bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
        
 
         

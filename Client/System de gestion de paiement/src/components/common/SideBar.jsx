@@ -6,7 +6,7 @@ const Sidebar = () => {
 
   
   return (
-    <div id="view" class=" flex flex-row w-1/4" x-data="{ sidenav: true }">
+    <div id="view" class=" flex flex-row " x-data="{ sidenav: true }">
       <button class="p-2 border-2 bg-white rounded-md border-gray-200 shadow-lg text-gray-500 focus:bg-teal-500 focus:outline-none focus:text-white absolute top-0 left-0 sm:hidden">
         <svg
           className="w-5 h-5 fill-current"
