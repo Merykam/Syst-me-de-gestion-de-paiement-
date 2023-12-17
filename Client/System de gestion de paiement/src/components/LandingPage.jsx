@@ -7,7 +7,7 @@ import Register from './Register'
 import Routes from '../components/Routes'
 
 function LandingPage() {
-  const [count, setCount] = useState(0)
+ 
   const [page,setPage] = useState('')
 
     const togglePage = (name) => {

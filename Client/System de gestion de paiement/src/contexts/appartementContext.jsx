@@ -16,9 +16,9 @@ export function AppartementProvider({ children }) {
     const [formData, setFormData] = useState({
       name: '',
       description: '',
-      prixParMoix: '',
-      surface:'',
-      nombrePieces:'',
+      prixParMoix: null,
+      surface:null,
+      nombrePieces:null,
       adresse:'',
       status:'',
       clientId:''
@@ -51,7 +51,7 @@ export function AppartementProvider({ children }) {
 
     try {
         console.log(formData)
-        const response = await axios.post('http://localhost:8000/api/appartement/insertAppartement', formData);
+        const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData);
        
         // if(response.data.message){
         //     setSuccessMessage(response.data.message)

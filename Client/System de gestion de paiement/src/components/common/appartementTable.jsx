@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
+import appartement from '../../assets/appartement.jpg'
 import Dashboard from "../Dashboard";
 import Form from '../common/form'
 
@@ -12,91 +11,54 @@ const appartementTable = ({appartement2}) => {
 
 
   return (
+  <div className="">
    
-    <div
-      className="w-3/4 relative"
-    >
-
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css"/>
-      <div className="flex flex-wrap  ">
-        <div
-          className="px-3 mb-6"
-        >
-          <div className=" text-dark flex-[1_auto] flex flex-col break-words  bg-clip-border rounded-[.95rem] bg-white m-5">
-            <div className=" absolute w-full bg-white  flex flex-col  break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 ">
-              <div className="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-                <h3 className="flex justify-between m-2 ml-0 font-medium text-xl/tight text-dark w-full">
-                  <div className="">
-                  <span className="mr-3 font-semibold text-dark">Appartements</span>
-                  {/* <span className=" mt-5 text-gray-600 text-sm">
-                      All appartements you have
-                    </span> */}
-                  </div>
-               
-                  {/* <div className="flex justify-center">
-                      <button  className="rounded-3xl bg-black px-5 py-2 text-white text-base">+ appartement</button>
-                  </div> */}
-
-                  <Form/>
-                        
-               
-                   
-                
-                </h3>
-             
-              </div>
-
-              <div className="flex-auto block py-8 pt-6 px-9 mt-10">
-                <div className="overflow-x-auto">
-                  <table className="w-full my-0 align-middle text-dark border-neutral-200">
-                    <thead className="align-bottom">
-                      <tr className=" text-[0.90rem] text-dark">
-                        <th className="pb-3 text-start min-w-[175px]">
-                          Name
-                        </th>
-                        <th className="pb-3 text-end min-w-[100px]">
-                          Adresse
-                        </th>
-                        <th className="pb-3 text-end min-w-[100px]">
-                          Surface
-                        </th>
-                        <th className="pb-3 text-end min-w-[100px]">Prix par mois</th>
-                        <th className="pb-3 text-end min-w-[100px]">
-                           Pièces
-                        </th>
-                      
-                        <th className="pb-3 text-end min-w-[100px]">
-                          Status
-                        </th>
-                        <th className="pb-3 text-end min-w-[100px]">
-                          Client
-                        </th>
-                       
-
-                        <th className="pb-3 text-end min-w-[50px]">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                 
-                     
-                    {appartement2 && appartement2.map((appart)=>(
-                    
-
-                
-               
-                        <tr
-                       
-                          className="border-b border-dashed last:border-b-0  text-[0.90rem]"
-                        >
-                               
-                          <td className="p-3 pl-0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css"/>
+<div class="flex flex-wrap mb-5  ">
+  <div class="px-3 mb-6  mx-auto">
+    <div class=" flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
+      <div class=" relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
+      
+        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
+          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
+            <span class="mr-3 font-semibold text-dark">Appartement</span>
+            <span class="mt-1 font-medium text-secondary-dark text-lg/normal">All appartements you have</span>
+          </h3>
+          <div class="relative flex flex-wrap items-center my-2">
+            <Form/>
+            {/* <a href="javascript:void(0)" class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"> See other projects </a> */}
+          </div>
+        </div>
+    
+        <div class="flex-auto block py-8 pt-6 px-9">
+          <div class="overflow-x-auto ">
+            <table class="align-middle text-dark border-neutral-200">
+              <thead class="align-bottom">
+                <tr class="font-semibold text-[0.95rem] text-secondary-dark">
+                  <th class="pb-3 text-start min-w-[175px]">Name</th>
+                  <th class="pb-3 text-end min-w-[100px]">Adresse</th>
+                  <th class="pb-3 text-end min-w-[100px]">Surface</th>
+                  <th class="pb-3 text-end min-w-[100px]">Price</th>
+                  <th class="pb-3 text-end min-w-[100px]">Pieces</th>
+                  <th class="pb-3 text-end min-w-[100px]">Status</th>
+                  <th class="pb-3 text-end min-w-[50px]">Client</th>
+                  <th class="pb-3 text-end min-w-[50px]">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              {appartement2 && appartement2.map((appart)=>(
+                <tr class="border-b border-dashed last:border-b-0">
+               <td className="p-3 pl-0">
                             <div className="flex items-center">
+                            <div class="relative inline-block shrink-0 rounded-2xl me-3">
+                        <img src={appartement} class="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt=""/>
+                      </div>
                               <div className="flex flex-col justify-start">
                            
                                   <a
                                    
                                     href="#"
-                                    className="mb-1  transition-colors duration-200 ease-in-out  text-[0.90rem] text-secondary-inverse hover:text-primary"
+                                    className="mb-1 font-semibold  transition-colors duration-200 ease-in-out  text-[0.90rem] text-secondary-inverse hover:text-primary"
                                   >
                                {appart.name}
                                
@@ -107,7 +69,7 @@ const appartementTable = ({appartement2}) => {
                           </td>
 
                           <td className="p-3 pr-0 text-end">
-                            <span className=" text-light-inverse text-md/normal">
+                            <span className="font-semibold text-light-inverse text-md/normal">
                            {appart.adresse}
                             </span>
                           </td>
@@ -137,11 +99,11 @@ const appartementTable = ({appartement2}) => {
                        
                             <td className="p-3 pr-0 text-end">
                           {appart.status == "vide" ?  <span
-                                className="bg-red-500/25 font-bold text-red-800 text-center align-baseline inline-flex px-4 py-3 mr-auto items-center text-[.95rem] leading-none rounded-lg"
+                                className="font-semibold text-danger bg-danger-light opacity-9 font-bold  text-center align-baseline inline-flex px-4 py-3 mr-auto items-center text-[.95rem] leading-none rounded-lg"
                               >
                                {appart.status}
                               </span>: <span
-                                className="bg-lime-500/25 font-bold text-lime-900 text-center align-baseline inline-flex px-4 py-3 mr-auto items-center text-[.95rem] leading-none rounded-lg"
+                                className="font-semibold font-bold  text-success bg-success-light text-center align-baseline inline-flex px-4 py-3 mr-auto items-center text-[.95rem] leading-none rounded-lg"
                               >
                                {appart.status}
                               </span>
@@ -156,7 +118,7 @@ const appartementTable = ({appartement2}) => {
                             <td className="p-3 pr-0 text-end">
                         
                         <span
-                          className=" text-center align-baseline inline-flex px-4 py-3 mr-auto items-center  text-[.95rem] leading-none rounded-lg"
+                          className=" font-semibold text-center align-baseline inline-flex px-4 py-3 mr-auto items-center  text-[.95rem] leading-none rounded-lg"
                         >
                          {appart.clientId? appart.clientId.name : "No client" }
                         </span>
@@ -166,8 +128,8 @@ const appartementTable = ({appartement2}) => {
                   
                             <td class="p-3 pr-0 text-end  text-[0.90rem] flex">
                          
-                                <button
-                                  className="bg-gray-700 text-white rounded p-1"
+                                {/* <button
+                                  className=" text-black rounded p-1"
                                  
                                 >
                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -175,9 +137,9 @@ const appartementTable = ({appartement2}) => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                   </svg>
 
-                                </button>
+                                </button> */}
                                 <button
-                                className="bg-red-600 text-white rounded p-1 m-1"
+                                className=" text-danger rounded p-1 m-1"
                                
                               >
                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -187,7 +149,7 @@ const appartementTable = ({appartement2}) => {
                               </button>
 
                           
-                              <button className="text-white bg-green-800 rounded p-1 m-1">
+                              <button className="text-success  rounded p-1 m-1">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                               </svg>
@@ -195,18 +157,21 @@ const appartementTable = ({appartement2}) => {
 
                             </td>
                        
-                        </tr>
-    ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+ 
+                </tr>
+))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+  </div>
   );
+  
 };
 
 export default appartementTable

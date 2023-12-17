@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const Sidebar = () => {
+const Sidebar = ({to}) => {
 
   
   return (
-    <div id="view" class=" flex flex-row " x-data="{ sidenav: true }">
+    <div id="view" class=" flex flex-row" x-data="{ sidenav: true }">
       <button class="p-2 border-2 bg-white rounded-md border-gray-200 shadow-lg text-gray-500 focus:bg-teal-500 focus:outline-none focus:text-white absolute top-0 left-0 sm:hidden">
         <svg
           className="w-5 h-5 fill-current"
@@ -69,7 +69,7 @@ const Sidebar = () => {
           </div>
           <div id="menu" class="flex flex-col space-y-2">
             <a
-              href=""
+              onClick={()=>to('statistics')}
               class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
             >
               <svg
@@ -87,7 +87,7 @@ const Sidebar = () => {
      
    
             <a
-              href=""
+              onClick={()=>to('paiment')}
               class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
             >
               <svg
@@ -105,7 +105,7 @@ const Sidebar = () => {
               <span class="text-white">Paiment</span>
             </a>
             <a
-              href=""
+             onClick={()=>to('appartement')}
               class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
             >
               <svg
@@ -120,7 +120,7 @@ const Sidebar = () => {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span class="text-white">Appartements</span>
+              <span  class="text-white">Appartements</span>
             </a>
 
             <a

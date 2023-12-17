@@ -73,10 +73,28 @@ const showPaiment = async(req,res)=>{
 
 }
 
+const showPaiments = async(req,res)=>{
+
+    const appartementPaiments = await Paiment.find().populate({
+        path: "clientId",
+        module: "client",
+        select: "name"
+    }).populate({
+        path: "appartementId",
+        module: "Appartement",
+        select: "name"
+    })
+
+    return res.status(200).json({ success: true, appartementPaiments: appartementPaiments })
+
+}
+
+
 module.exports={
   
     insertPaiment,
-    showPaiment
+    showPaiment,
+    showPaiments
    
 };
 

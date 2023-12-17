@@ -5,53 +5,26 @@ import {LockIcon} from './LockIcon.jsx';
 import { useAppartement } from "../../contexts/appartementContext.jsx";
 import { useState } from "react";
 import axios from "axios";
+
 export default function form() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  // const {formData,setFormData, addAppartement}= useAppartement();
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    prixParMoix: null,
-    surface:null,
-    nombrePieces:null,
-    adresse:'',
-    status:'',
-    clientId:''
-  
-  });
+  const {formData,setFormData, addAppartement}= useAppartement();
+ 
 
-  const handleInputChange = (e) => {
+const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 };
-const addAppartement = async (e) => {
+
+
+const handleAppartData = (e) =>{
   e.preventDefault();
-  console.log("gggggggg");
+  addAppartement();
 
-  try {
-      console.log(formData)
-      const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData);
-     
-      // if(response.data.message){
-      //     setSuccessMessage(response.data.message)
-      // }
-  
-
-
-  } catch (error) {
-     
-      //  setErrorMessage(error.response.data.error)
-      console.error(error); 
-  }
-};
-
-// const handleAppartData = () =>{
-//   addAppartement();
-
-// }
+}
 
   return (
     <>
-      <Button onPress={onOpen} className="text-white"   style={{backgroundColor:"#095028"}}>+Appartement</Button>
+      <Button onPress={onOpen} className="text-success bg-success-light"   >+ Add Appartement</Button>
       <Modal 
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
@@ -59,7 +32,7 @@ const addAppartement = async (e) => {
       >
         <ModalContent>
           {(onClose) => (
-            <form onSubmit={addAppartement}>
+            <form onSubmit={handleAppartData}>
               <ModalHeader className="flex flex-col gap-1">Add appartement</ModalHeader>
               <ModalBody>
                 <Input
@@ -141,7 +114,7 @@ const addAppartement = async (e) => {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button type="submit" color="primary">
+                <Button type="submit" className="text-white" style={{backgroundColor:"#095028"}}>
                  Submit
                 </Button>
               </ModalFooter>

@@ -6,15 +6,16 @@ const Navbar = ({to}) => {
   
   return (
     <div>
-        <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-2xl  bg-opacity-0">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <img
+        {/* <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-2xl  bg-opacity-0"> */}
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 bg-white">
+        {/* <img
           onClick={() => navigate("/")}
           className="w-24"
           src={logo}
           alt=""
           srcset=""
-        />
+        /> */}
+        <h1 className='font-bold text-2xl'>Loca<span className='text-lime-700'>Dwell</span></h1>
     
         <div className="  md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex  flex-col  md:p-0  items-center  rounded-xl bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -41,7 +42,7 @@ const Navbar = ({to}) => {
           </ul>
         </div>
       </div>
-    </nav>
+    {/* </nav> */}
     </div>
   )
 }
