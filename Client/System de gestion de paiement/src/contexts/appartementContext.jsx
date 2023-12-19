@@ -12,8 +12,22 @@ const appartementContext = createContext();
 export function AppartementProvider({ children }) {
 
     const [appartement2, setAppartement]= useState('');
+    const [get,setGet]=useState(false)
+    const [appartementData, setAppartementData]= useState('');
 
     const [formData, setFormData] = useState({
+      name: '',
+      description: '',
+      prixParMoix: null,
+      surface:null,
+      nombrePieces:null,
+      adresse:'',
+      status:'',
+      clientId:''
+    
+    });
+
+    const [formDataUpdated, setFormDataUpdated] = useState({
       name: '',
       description: '',
       prixParMoix: null,
@@ -46,6 +60,31 @@ export function AppartementProvider({ children }) {
   };
 
 
+  const editAppartement = async (id)=>{
+    console.log(id);
+    try {
+    
+      const response = await axios.get(`http://localhost:8000/api/appartement/editAppartement?id=${id}`);
+      setAppartementData(response.data.appartementData)
+      setGet(true)
+    
+      // /console.log(response.data.appartementData);
+  
+
+
+  } catch (error) {
+       
+       
+      console.error(error); 
+
+  }
+  return false 
+
+  }
+
+ 
+
+
   const addAppartement = async () => {
     
 
@@ -66,6 +105,23 @@ export function AppartementProvider({ children }) {
     }
 };
 
+const updateAppartement = async (id)=>{
+  
+  try {
+    console.log(formDataUpdated)
+    const response = await axios.post(`http://localhost:8000/api/appartement/updateAppartement?id=${id}`, formDataUpdated);
+    console.log(response.data);
+   
+
+
+
+} catch (error) {
+  
+    console.error(error); 
+}
+
+}
+
 
 
   return (
@@ -75,7 +131,12 @@ export function AppartementProvider({ children }) {
         appartement2,
         setFormData,
         formData,
-        addAppartement
+        addAppartement,
+        appartementData,
+        editAppartement,
+        updateAppartement,
+        formDataUpdated,
+        setFormDataUpdated
   
       }}
     >

@@ -51,9 +51,19 @@ const insertClient = async (req,res)=>{
 
    }
 
+
+const showClient = async(req,res)=>{
+
+    const allCient = await Client.find()
+
+    return res.status(200).json({ success: true, allCient: allCient })
+
+}
+
 module.exports={
   
-    insertClient
+    insertClient,
+    showClient
    
 };
 

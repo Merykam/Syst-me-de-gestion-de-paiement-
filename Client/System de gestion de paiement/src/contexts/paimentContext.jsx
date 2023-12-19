@@ -12,6 +12,7 @@ const paimentContext = createContext();
 export function PaimentProvider({ children }) {
 
     const [paiment, setPaiments]= useState('');
+    const [paimentsAppartement, setPaimentsAppartement]= useState('');
 
     const [formData, setFormData] = useState({
         appartementId:"",
@@ -36,6 +37,23 @@ export function PaimentProvider({ children }) {
     } catch (error) {
          
          
+        console.error(error); 
+    }
+
+  };
+
+  const showPaimentsOfAppartement = async (id) => {
+    try {
+        console.log("hello");
+    
+        const response = await axios.get(`http://localhost:8000/api/paiment/showPaiment?id=${id}`);
+        setPaimentsAppartement(response.data.appartementPaiments)
+      
+        console.log(response.data.appartementPaiments);
+    
+
+
+    } catch (error) {  
         console.error(error); 
     }
 
@@ -71,7 +89,9 @@ export function PaimentProvider({ children }) {
         paiment,
         addPaiment,
         setFormData,
-        formData
+        formData,
+        showPaimentsOfAppartement,
+        paimentsAppartement
    
   
       }}

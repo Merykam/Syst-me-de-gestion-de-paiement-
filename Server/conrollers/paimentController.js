@@ -54,12 +54,12 @@ const insertPaiment = async (req,res)=>{
 
 
 const showPaiment = async(req,res)=>{
-    const id1 = req.params.id1;
-    console.log(id1);
-    const findResideClient = await Appartement.findOne({_id:id1});
+    const { id } = req.query;
+    console.log(id);
+    const findResideClient = await Appartement.findOne({_id:id});
     console.log(findResideClient);
     const idClient = findResideClient.clientId;
-    const appartementPaiments = await Paiment.find({appartementId:id1,clientId:idClient}).populate({
+    const appartementPaiments = await Paiment.find({appartementId:id,clientId:idClient}).populate({
         path: "clientId",
         module: "client",
         select: "name"
@@ -86,6 +86,40 @@ const showPaiments = async(req,res)=>{
     })
 
     return res.status(200).json({ success: true, appartementPaiments: appartementPaiments })
+
+}
+
+const updatePaiment = async(req,res)=>{
+    const { appartementId, date, prixParMois} = req.body;
+    const id = req.query.id
+
+
+
+    try{
+        const Appartement1 = await Appartement.findOne({ name : appartementId });
+        
+            if (!Appartement1) {
+                return res.status(400).json({ err: "This appartement doesn't exist" });
+            }
+
+            const AppartId1 = Appartement1._id;
+            const clientId1 = Appartement1.clientId;
+
+        const updatePaiment =await Paiment.findByIdAndUpdate(id,{$set:{
+                clientId: clientId1,
+                appartementId: AppartId1,
+                date:date,
+                prixParMois:prixParMois
+            
+        }});
+     
+
+        return res.json({ success: updatePaiment, message: 'Paiment updated successfully' });
+       
+
+    }catch(error){
+        return res.status(500).json({ success: false, error: error.message });
+    }
 
 }
 

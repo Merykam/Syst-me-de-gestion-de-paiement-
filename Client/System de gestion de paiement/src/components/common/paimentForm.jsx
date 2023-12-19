@@ -24,7 +24,7 @@ const handlePaimentData = (e) =>{
 
   return (
     <>
-      <Button onPress={onOpen} className="text-success bg-success-light font-bold text-md"   >+ Add paiment</Button>
+      <Button onPress={onOpen} className=" font-bold text-white text-md"  style={{backgroundColor:"black"}}   >+ Add paiment</Button>
       <Modal 
         isOpen={isOpen} 
         onOpenChange={onOpenChange}

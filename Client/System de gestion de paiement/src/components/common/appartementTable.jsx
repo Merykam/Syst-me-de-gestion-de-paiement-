@@ -2,12 +2,36 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import appartement from '../../assets/appartement.jpg'
 import Dashboard from "../Dashboard";
-import Form from '../common/form'
+import Form from '../common/form';
+import { usePaiment } from "../../contexts/paimentContext";
+import UpdateAppartementForm from "./updateAppartementForm";
+import { useAppartement } from "../../contexts/appartementContext";
+import { useDisclosure } from "@nextui-org/react";
 
-const appartementTable = ({appartement2}) => {
- console.log(appartement2);
+const appartementTable = ({appartement2, to}) => {
+ const {showPaimentsOfAppartement} = usePaiment()
+ const {editAppartement,appartementData,get,setGet}= useAppartement();
+ const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+ async function handelAppartementId(id){
+  await showPaimentsOfAppartement(id)
+  to("paiments")
 
+}
+
+const  handelAppartementData=async(id)=>{
+  console.log('meryem')
+  console.log(id);
+  console.log(false)
+  // useEffect(()=>{
+   
+      
+       await editAppartement(id)
+      
+        onOpen()
+    
+  // },[appartementData])
+}
 
 
   return (
@@ -46,14 +70,20 @@ const appartementTable = ({appartement2}) => {
                 </tr>
               </thead>
               <tbody>
-              {appartement2 && appartement2.map((appart)=>(
-                <tr class="border-b border-dashed last:border-b-0">
+              {appartement2 && appartement2.map((appart)=>{
+                console.log(appart._id)
+                console.log(appartement2)
+                return (
+                  <tr class="border-b border-dashed last:border-b-0">
                <td className="p-3 pl-0">
                             <div className="flex items-center">
                             <div class="relative inline-block shrink-0 rounded-2xl me-3">
                         <img src={appartement} class="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl" alt=""/>
                       </div>
-                              <div className="flex flex-col justify-start">
+                              <div  onClick={() => {
+                                  handelAppartementId(appart._id);
+                                }} className="flex flex-col justify-start">
+                             
                            
                                   <a
                                    
@@ -149,7 +179,8 @@ const appartementTable = ({appartement2}) => {
                               </button>
 
                           
-                              <button className="text-success  rounded p-1 m-1">
+                              <button className="text-success  rounded p-1 m-1" onClick={()=>handelAppartementData(appart?._id)}>
+                              {/* <button className="text-success  rounded p-1 m-1" onClick={()=>console.log(appart?._id)}> */}
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                               </svg>
@@ -159,7 +190,10 @@ const appartementTable = ({appartement2}) => {
                        
  
                 </tr>
-))}
+                )
+              })}
+              
+              <UpdateAppartementForm isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange}/>
               </tbody>
             </table>
           </div>

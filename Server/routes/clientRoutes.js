@@ -6,6 +6,7 @@ const clientController = require('../conrollers/clientController');
 
 
 router.post('/insertClient',clientController.insertClient);
+router.get('/showClient',clientController.showClient);
 
 
 

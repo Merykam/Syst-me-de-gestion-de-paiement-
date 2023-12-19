@@ -35,8 +35,16 @@ const insertAppartement = async (req,res)=>{
 
       
         try {
+            const appartName = await Appartement.findOne({ name :name });
+            
             const client1 = await client.findOne({ name :clientId });
+            const existingAppartement = await Appartement.findOne({ adresse : adresse});
+        
+            if (existingAppartement || appartName) {
+                return res.status(400).json({ err: "This appartement already exists" });
+            }
             console.log(client1);
+
         
             if (!client1) {
                 
@@ -61,11 +69,7 @@ const insertAppartement = async (req,res)=>{
         
             const clientId1 = client1._id;
         
-            const existingAppartement = await Appartement.findOne({ adresse });
-        
-            if (existingAppartement) {
-                return res.status(400).json({ err: "This appartement already exists" });
-            }
+           
         
             const newAppartement = new Appartement({
                 name: req.body.name,
@@ -101,11 +105,59 @@ const showAppartement = async(req,res)=>{
     return res.status(200).json({ success: true, appartements: allApartementsWithHisClients })
 
 }
+const editAppartement = async(req,res)=>{
+    const id = req.query.id;
+    const appartementData = await Appartement.find({_id:id})
+    return res.status(200).json({ success: true, appartementData: appartementData })
+
+}
+
+const updateAppartement = async (req,res)=>{
+
+    const {id}=req.query
+    console.log(id);
+  
+    const { name, description, prixParMois, surface, nombrePieces, adresse, status, clientId} = req.body;
+    try{
+        console.log("hello");
+        const existingAppartement = await Appartement.findOne({ adresse : adresse});
+        const appartName = await Appartement.findOne({name :name});
+        const findId = await Appartement.findOne({_id:id})
+     
+
+        // if (!findId && (existingAppartement || appartName)) {
+        //     return res.status(400).json({ err: "This appartement already exists" });
+        // }
+
+        const client1 = await client.findOne({ name :clientId });
+        const clientId1 = client1._id;
+        const updateAppartement =await Appartement.findByIdAndUpdate(id,{$set:{
+            name: req.body.name,
+            description: req.body.description,
+            prixParMois: req.body.prixParMois,
+            surface: req.body.surface,
+            nombrePieces: req.body.nombrePieces,
+            adresse: req.body.adresse,
+            status: req.body.status,
+            clientId: clientId1,
+        }});
+     
+
+        return res.json({ success: updateAppartement, message: 'Appartement updated successfully' });
+
+    }catch(error){
+        return res.status(500).json({ success: false, error: error.message });
+    }
+
+    
+}
 
 module.exports={
   
     insertAppartement,
-    showAppartement
+    showAppartement,
+    updateAppartement,
+    editAppartement
    
 };
 

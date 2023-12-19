@@ -3,36 +3,44 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDis
 import {MailIcon} from './MailIcon.jsx';
 import {LockIcon} from './LockIcon.jsx';
 import { useAppartement } from "../../contexts/appartementContext.jsx";
-import { useClient } from "../../contexts/clientContext.jsx";
 import { useState } from "react";
 import axios from "axios";
 
-export default function form() {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const {formData,setFormData, addAppartement}= useAppartement();
-  const {showClients,client}= useClient();
- 
+export default function UpdateAppartementForm({isOpen, onOpen, onOpenChange}) {
+//   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const {formData,setFormData, addAppartement,appartementData, editAppartement,updateAppartement,formDataUpdated,setFormDataUpdated}= useAppartement();
+    const [name, setName] = useState("")
+
+    // useEffect(()=> {
+    //    setName(appartementData[0]?.name)
+    //    onChange={(e) => setName(e.target.value)}
+    // }, [appartementData])
+
+console.log(formDataUpdated);
 
 const handleInputChange = (e) => {
-   
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData)
-  };
-useEffect(()=>{
-  showClients();
-  console.log(client);
-},[])
+  console.log(e.target.name, e.target.value)
+    setFormDataUpdated({ ...formDataUpdated, [e.target.name]: e.target.value });
+    
+
+};
+
 
 
 const handleAppartData = (e) =>{
-  e.preventDefault();
-  addAppartement();
+  e.preventDefault()
+  const id = appartementData[0]?._id;
+  console.log(id);
+  console.log(formDataUpdated);
+  updateAppartement(id);
 
 }
 
   return (
     <>
-      <Button onPress={onOpen} className=" font-bold text-white text-md"  style={{backgroundColor:"black"}}  >+ Add Appartement</Button>
+      {/* <Button onPress={onOpen}  > <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                              </svg></Button> */}
       <Modal 
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
@@ -40,17 +48,27 @@ const handleAppartData = (e) =>{
       >
         <ModalContent>
           {(onClose) => (
+    
+         
             <form onSubmit={handleAppartData}>
-              <ModalHeader className="flex flex-col gap-1">Add appartement</ModalHeader>
+
+              <ModalHeader className="flex flex-col gap-1">Update appartement</ModalHeader>
               <ModalBody>
+               
+                
+
+              {appartementData !== "" && appartementData?.map(appa=>(<div>
+
+            
                 <Input
                   autoFocus
-                 
+                  defaultValue={appa.name}
                   label="Name"
                   placeholder="Enter Appartement name"
                   variant="bordered"
                   name="name"
                   onChange={handleInputChange}
+                 
                 />
                 <Input
                 
@@ -59,6 +77,7 @@ const handleAppartData = (e) =>{
                   type="text"
                   variant="bordered"
                   name="description"
+                  defaultValue={appa.description}
                   onChange={handleInputChange}
                 />
                     <Input
@@ -68,6 +87,7 @@ const handleAppartData = (e) =>{
                 type="number"
                 variant="bordered"
                 name="prixParMois"
+                defaultValue={appa.prixParMois}
                 onChange={handleInputChange}
               />
                   <Input
@@ -77,6 +97,7 @@ const handleAppartData = (e) =>{
                 type="number"
                 variant="bordered"
                 name="surface"
+                defaultValue={appa.surface}
                 onChange={handleInputChange}
               />
              
@@ -87,6 +108,7 @@ const handleAppartData = (e) =>{
                 type="number"
                 variant="bordered"
                 name="nombrePieces"
+                defaultValue={appa.nombrePieces}
                 onChange={handleInputChange}
               />
                 <Input
@@ -96,39 +118,31 @@ const handleAppartData = (e) =>{
                 type="text"
                 variant="bordered"
                 name="adresse"
+                defaultValue={appa.adresse}
                 onChange={handleInputChange}
               />
-             <select onChange={handleInputChange} className="border-2 rounded-2xl p-3" name="clientId" id="">
-              {client.map(singlClient=>(
-              <option  
-                variant="bordered"
+                 <Input
                 
-                value={singlClient.name}
-                >
-                  {singlClient.name}
-                  </option>
-                ))}
-
-              </select>
-
-          
-
-                <select onChange={handleInputChange} className="border-2 rounded-2xl p-3" name="status" id="">
-            
-                
-              <option  
+                label="Status"
+                placeholder="status"
+                type="text"
                 variant="bordered"
-                value="loué"
-                  >loué</option>
-                   <option 
-                    value="vide" 
-                variant="bordered"
-                  >vide</option>
+                name="status"
+                defaultValue={appa.status}
+                onChange={handleInputChange}
+              />
+                 <Input
                 
-
-
-              </select>
-              
+                label="Client"
+                placeholder="Nom de client"
+                type="text"
+                variant="bordered"
+                name="clientId"
+                defaultValue="client"
+                onChange={handleInputChange}
+              />
+             
+             </div>))}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>

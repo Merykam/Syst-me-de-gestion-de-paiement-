@@ -7,6 +7,7 @@ import { useAppartement } from '../contexts/appartementContext'
 import Paiment from './paiment'
 import Statistics from './Statistics'
 import { usePaiment } from '../contexts/paimentContext'
+import AppartementPaiments from './AppartementPaiments'
 
 const Dashboard = () => {
   const {showPaiments,paiment}= usePaiment();
@@ -35,11 +36,12 @@ const Dashboard = () => {
       <div className=''>
       <Sidebar to={togglePage}/>
       </div>
-      <div className=''>
-        {page == "appartement" ?  <Appartement appartement2 = {appartement2}/> : ""}
+      <div className='mx-auto'>
+        {page == "appartement" ?  <Appartement appartement2 = {appartement2} to={togglePage}/> : ""}
        
         {page == "paiment" ?   <Paiment paiment={paiment}/>: ""}
         {page == "statistics" ?  <Statistics/> : ""}
+        {page == "paiments" ?  <AppartementPaiments/> : ""}
      
       </div>
    
