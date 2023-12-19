@@ -22,7 +22,7 @@ const signup = async (req,res)=>{
             return res.status(400).json({ error: 'Adresse e-mail invalide.' });
         }
     
-        if (!validator.isLength(password, { min: 6 })) {
+        if (!validator.isStrongPassword(password, { min: 6 })) {
             return res.status(400).json({ error: 'Le mot de passe doit avoir au moins 6 caractères.' });
         }
 
@@ -30,9 +30,10 @@ const signup = async (req,res)=>{
 
         try{
 
-            const userdb = await User.findOne({ email });
+            const userdb = await User.findOne({ email:email});
+
             if(userdb){
-                res.status(400).res.json({err :"user already exists" });
+                return res.json({err :"user already exists" });
           
             }
            
