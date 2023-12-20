@@ -17,6 +17,8 @@ export function AppartementProvider({ children }) {
     const [get,setGet]=useState(false)
     const [appartementData, setAppartementData]= useState('');
 
+    const [rentedAppartement, setRentedAppartements]=useState('')
+
     const [formData, setFormData] = useState({
       name: '',
       description: '',
@@ -50,6 +52,25 @@ export function AppartementProvider({ children }) {
         console.log(response);
       
         console.log(response.data.appartements);
+        
+    
+
+
+    } catch (error) {
+         
+         
+        console.error(error); 
+    }
+
+  };
+
+  const showRentedAppartements = async () => {
+    try {    
+        const response = await axios.get('http://localhost:8000/api/appartement/rentedAppartements', { withCredentials: true });
+        setRentedAppartements(response.data.rentedAppartements)
+        console.log(response);
+      
+        console.log(response.data.rentedAppartements);
         
     
 
@@ -202,6 +223,23 @@ const updateAppartement = async (id)=>{
 
 }
 
+const deleteAppartement = async (id)=>{
+  
+  try {
+  
+    const response = await axios.post(`http://localhost:8000/api/appartement/deleteAppartement?id=${id}`, { withCredentials: true });
+    console.log(response.data.message);
+   
+
+
+
+} catch (error) {
+  
+    console.error(error); 
+}
+
+}
+
 
 
   return (
@@ -218,6 +256,9 @@ const updateAppartement = async (id)=>{
         formDataUpdated,
         setFormDataUpdated,
         errors,
+        showRentedAppartements,
+        rentedAppartement,
+        deleteAppartement
   
       }}
     >

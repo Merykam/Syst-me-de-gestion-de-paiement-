@@ -10,7 +10,7 @@ import { useDisclosure } from "@nextui-org/react";
 
 const appartementTable = ({appartement2, to}) => {
  const {showPaimentsOfAppartement} = usePaiment()
- const {editAppartement,appartementData,get,setGet}= useAppartement();
+ const {editAppartement,appartementData,deleteAppartement}= useAppartement();
  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
  async function handelAppartementId(id){
@@ -168,7 +168,7 @@ const  handelAppartementData=async(id)=>{
                                   </svg>
 
                                 </button> */}
-                                <button
+                                <button onClick={()=>{deleteAppartement(appart?._id)}}
                                 className=" text-danger rounded p-1 m-1"
                                
                               >

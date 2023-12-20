@@ -46,7 +46,7 @@ export function PaimentProvider({ children }) {
     try {
         console.log("hello");
     
-        const response = await axios.get(`http://localhost:8000/api/paiment/showPaiment?id=${id}`);
+        const response = await axios.get(`http://localhost:8000/api/paiment/showPaiment?id=${id}`,{ withCredentials: true });
         setPaimentsAppartement(response.data.appartementPaiments)
       
         console.log(response.data.appartementPaiments);
@@ -61,11 +61,12 @@ export function PaimentProvider({ children }) {
 
 
   const addPaiment = async () => {
-    
 
+    
+      console.log(formData);
     try {
         console.log(formData)
-        const response = await axios.post('http://localhost:8000/api/paiment/insertPaiment', formData);
+        const response = await axios.post('http://localhost:8000/api/paiment/insertPaiment', formData,{ withCredentials: true });
        
         // if(response.data.message){
         //     setSuccessMessage(response.data.message)

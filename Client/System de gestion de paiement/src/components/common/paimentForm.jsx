@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
 import {MailIcon} from './MailIcon.jsx';
 import {LockIcon} from './LockIcon.jsx';
 import { usePaiment } from "../../contexts/paimentContext.jsx";
 import { useState } from "react";
 import axios from "axios";
+import { useAppartement } from "../../contexts/appartementContext.jsx";
 
 export default function form() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const {addPaiment,formData,setFormData}= usePaiment();
- 
+  const {showRentedAppartements,rentedAppartement}=useAppartement()
+ useEffect(()=>{
+  showRentedAppartements();
+ },[])
 
 const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +39,7 @@ const handlePaimentData = (e) =>{
             <form onSubmit={handlePaimentData}>
               <ModalHeader className="flex flex-col gap-1">Add paiment</ModalHeader>
               <ModalBody>
-                <Input
+                {/* <Input
                   autoFocus
                  
                   label="Name"
@@ -43,7 +47,14 @@ const handlePaimentData = (e) =>{
                   variant="bordered"
                   name="appartementId"
                   onChange={handleInputChange}
-                />
+                /> */}
+                <select variant="bordered"  name="appartementId" onChange={handleInputChange}>
+                {rentedAppartement.map((appartement)=>(
+
+                  <option value={appartement.name}>{appartement.name}</option>
+
+                  ))}
+                </select>
              
                  <Input
                 

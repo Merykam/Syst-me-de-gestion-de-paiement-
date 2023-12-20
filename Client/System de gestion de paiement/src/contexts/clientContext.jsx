@@ -8,10 +8,15 @@ const clientContext = createContext();
 
 
 
-
 export function ClientProvider({ children }) {
 
     const [client, setClient]= useState('');
+    
+    const [FormData,setFormData]=useState({
+      name:"",
+      CIN:"",
+      phoneNumber:""
+    })
 
  
 
@@ -34,6 +39,23 @@ export function ClientProvider({ children }) {
 
   };
 
+  const addClient= async () => {
+    try {
+    console.log(FormData);
+        const response = await axios.post('http://localhost:8000/api/client/insertClient',FormData);
+        
+      
+        console.log(response.data);
+    
+
+
+    } catch (error) {
+         
+        console.error(error); 
+    }
+
+  };
+
 
 
 
@@ -43,7 +65,10 @@ export function ClientProvider({ children }) {
       value={{
         showClients,
         client,
-        setClient
+        setClient,
+        addClient,
+        FormData,
+        setFormData
        
    
   

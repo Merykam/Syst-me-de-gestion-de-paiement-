@@ -5,6 +5,8 @@ const insertClient = async (req,res)=>{
        
         const { name, CIN, phoneNumber} = req.body;
 
+        console.log(req.body);
+
       
 
         if (!validator.isLength(name, { min: 1, max: 255 })) {
@@ -15,7 +17,7 @@ const insertClient = async (req,res)=>{
             return res.status(400).json({ error: 'le CIN est requis' });
         }
     
-        if (!validator.isLength(phoneNumber, { min: 10, max: 15 })) {
+        if (!validator.isLength(phoneNumber, { min: 10, max: 23 })) {
             return res.status(400).json({ error: 'Le numéro de téléphone doit avoir au moins 10 caractères.' });
         }
 
@@ -23,7 +25,7 @@ const insertClient = async (req,res)=>{
 
         try{
 
-            const client = await Client.findOne({ CIN });
+            const client = await Client.findOne({ CIN:CIN });
             
 
             if(client){

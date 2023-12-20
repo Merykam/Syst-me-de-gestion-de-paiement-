@@ -8,6 +8,7 @@ import Paiment from './paiment'
 import Statistics from './Statistics'
 import { usePaiment } from '../contexts/paimentContext'
 import AppartementPaiments from './AppartementPaiments'
+import Client from './Client'
 
 const Dashboard = () => {
   const {showPaiments,paiment}= usePaiment();
@@ -39,11 +40,12 @@ const Dashboard = () => {
       <Sidebar to={togglePage}/>
       </div>
       
-        {page == "appartement" ? <div className='mx-auto overflow-scroll'> <Appartement appartement2 = {appartement2} to={togglePage}/> </div>: ""}
+        {page == "appartement" ? <div className='mx-auto  overflow-scroll'> <Appartement appartement2 = {appartement2} to={togglePage}/> </div>: ""}
        
         {page == "paiment" ? <div className='mx-auto overflow-scroll'>  <Paiment paiment={paiment}/> </div>: ""}
         {page == "statistics" ? <div> <Statistics/></div> : ""}
         {page == "paiments" ? <div className='mx-auto overflow-scroll'> <AppartementPaiments/> </div> : ""}
+        {page == "client" ? <div className='w-4/5 mx-auto bg-white m-5 p-5 h-4/5  opacity-90 rounded-3xl'> <Client/> </div> : ""}
      
         </div>
    

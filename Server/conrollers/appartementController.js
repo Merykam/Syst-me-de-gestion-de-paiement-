@@ -1,6 +1,7 @@
 const validator = require('validator');
 const Appartement = require('../models/appartement')
-const client = require('../models/client')
+const client = require('../models/client');
+const Paiment = require('../models/paiment');
 
 const insertAppartement = async (req,res)=>{
        
@@ -105,6 +106,11 @@ const showAppartement = async(req,res)=>{
     return res.status(200).json({ success: true, appartements: allApartementsWithHisClients })
 
 }
+const showRentedAppartements = async(req,res)=>{
+    const rentedAppartements = await Appartement.find({status:"loué"})
+    return res.status(200).json({ success: true, rentedAppartements: rentedAppartements })
+
+}
 const editAppartement = async(req,res)=>{
     const id = req.query.id;
     const appartementData = await Appartement.find({_id:id}).populate({
@@ -179,12 +185,35 @@ const updateAppartement = async (req,res)=>{
     
 }
 
+const deleteAppartement = async (req, res) => {
+    const { id } = req.query;
+    console.log(id);
+  
+    try {
+      
+      const deleteAppartementResult = await Appartement.deleteOne({ _id: id });
+      const deletePaymentsResult = await Paiment.deleteMany({ appartementId: id });
+  
+      if (deleteAppartementResult.deletedCount > 0 || deletePaymentsResult.deletedCount > 0) {
+        return res.status(200).json({ success: true, message: "Appartement with payments deleted successfully" });
+      } else {
+        return res.status(404).json({ success: false, message: "Appartement not found or no payments deleted" });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ success: false, message: "Internal server error" });
+    }
+  };
+  
+
 module.exports={
   
     insertAppartement,
     showAppartement,
     updateAppartement,
-    editAppartement
+    editAppartement,
+    showRentedAppartements,
+    deleteAppartement
    
 };
 
