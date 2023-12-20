@@ -29,7 +29,7 @@ useEffect(()=>{
     nombrePieces:appartementData[0]?.nombrePieces,
     adresse:appartementData[0]?.adresse,
     status:appartementData[0]?.status,
-    clientId:appartementData[0]?.clientId.name
+    clientId:appartementData[0]?.clientId?.name
   
   })}, [appartementData])
 

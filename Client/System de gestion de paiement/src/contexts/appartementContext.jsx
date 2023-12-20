@@ -44,11 +44,13 @@ export function AppartementProvider({ children }) {
 
   const showAppartements = async () => {
     try {
-    
-        const response = await axios.get('http://localhost:8000/api/appartement/showAppartement');
+      console.log("fffff");    
+        const response = await axios.get('http://localhost:8000/api/appartement/showAppartement', { withCredentials: true });
         setAppartement(response.data.appartements)
+        console.log(response);
       
         console.log(response.data.appartements);
+        
     
 
 
@@ -65,7 +67,7 @@ export function AppartementProvider({ children }) {
     console.log(id);
     try {
     
-      const response = await axios.get(`http://localhost:8000/api/appartement/editAppartement?id=${id}`);
+      const response = await axios.get(`http://localhost:8000/api/appartement/editAppartement?id=${id}`, { withCredentials: true });
       setAppartementData(response.data.appartementData)
       setGet(true)
     
@@ -166,7 +168,7 @@ export function AppartementProvider({ children }) {
   }
     try {
         console.log(formData)
-        const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData);
+        const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData,{ withCredentials: true });
        
         // if(response.data.message){
         //     setSuccessMessage(response.data.message)
@@ -187,7 +189,7 @@ const updateAppartement = async (id)=>{
   // }
   try {
     console.log(formDataUpdated)
-    const response = await axios.post(`http://localhost:8000/api/appartement/updateAppartement?id=${id}`, formDataUpdated);
+    const response = await axios.post(`http://localhost:8000/api/appartement/updateAppartement?id=${id}`, formDataUpdated, { withCredentials: true });
     console.log(response.data);
    
 

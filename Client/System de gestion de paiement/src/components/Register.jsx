@@ -1,50 +1,55 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/authContext';
 
 const Register = () => {
 
 
-
+const {setFormData1,formData1,handleSignup,errorMessage,successMessage}=useUser()
    
   // const navigate = useNavigate()
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
+  // const [successMessage, setSuccessMessage] = useState('');
 
-  const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      password: ''
+  // const [formData, setFormData] = useState({
+  //     name: '',
+  //     email: '',
+  //     password: ''
   
-  });
+  // });
 
   const handleInputChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData1({ ...formData1, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = async (e) => {
-      e.preventDefault();
+  // function handelDataSingup(){
+  //   handleSignup()
+  // }
 
-      try {
-          console.log(formData)
-          const response = await axios.post('http://localhost:8000/api/auth/signup', formData);
-          console.log(response.data);
-          if(response.data.message){
-              setSuccessMessage(response.data.message)
-          }
+  // const handleSignup = async (e) => {
+  //     e.preventDefault();
+
+  //     try {
+  //         console.log(formData)
+  //         const response = await axios.post('http://localhost:8000/api/auth/signup', formData);
+  //         console.log(response.data);
+  //         if(response.data.message){
+  //             setSuccessMessage(response.data.message)
+  //         }
       
 
 
-      } catch (error) {
-        if(error.response.data.error){
-          setErrorMessage(error.response.data.error);
+  //     } catch (error) {
+  //       if(error.response.data.error){
+  //         setErrorMessage(error.response.data.error);
 
-        }
+  //       }
          
            
-          console.error(error); 
-      }
-  };
+  //         console.error(error); 
+  //     }
+  // };
 
 
 

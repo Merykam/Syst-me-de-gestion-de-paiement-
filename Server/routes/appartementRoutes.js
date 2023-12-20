@@ -4,11 +4,13 @@ const router = express.Router();
 
 const appartementController = require('../conrollers/appartementController');
 
+const authenticateJWT = require('../middelwares/tokenMiddleware')
 
-router.post('/addAppartement',appartementController.insertAppartement);
+
+router.post('/addAppartement',authenticateJWT,appartementController.insertAppartement);
 router.get('/showAppartement',appartementController.showAppartement);
-router.get('/editAppartement',appartementController.editAppartement);
-router.post('/updateAppartement',appartementController.updateAppartement);
+router.get('/editAppartement',authenticateJWT,appartementController.editAppartement);
+router.post('/updateAppartement',authenticateJWT,appartementController.updateAppartement);
 
 
 module.exports=router;

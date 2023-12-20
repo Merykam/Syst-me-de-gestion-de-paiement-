@@ -3,53 +3,59 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import Routes from '../components/Routes'
 import Dashboard from './Dashboard';
+import { useUser } from '../contexts/authContext';
 const Login = () => {
   
    
   const navigate = useNavigate()
+  const {formData,setFormData,handleLogin}=useUser()
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const [formData, setFormData] = useState({
-      email: '',
-      password: ''
+
+  // const [formData, setFormData] = useState({
+  //     email: '',
+  //     password: ''
   
-  });
+  // });
+//  function handelSignupData(){
+//   handleLogin();
+//   }
 
   const handleInputChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
-      e.preventDefault();
+  // const handleLogin = async (e) => {
+  //     e.preventDefault();
 
-      try {
-          console.log(formData)
-          const response = await axios.post('http://localhost:8000/api/auth/signin', formData);
-          console.log(response.data);
-          if(response.data){
+  //     try {
+  //         console.log(formData)
+  //         const response = await axios.post('http://localhost:8000/api/auth/signin', formData);
+  //         console.log(response.data);
+  //         if(response.data){
             
             
-               navigate('/dashboard');
+  //              navigate('/dashboard');
 
              
 
-          }
+  //         }
          
       
 
 
-      } catch (error) {
-        if(error.response.data.error){
-          setErrorMessage(error.response.data.error);
+  //     } catch (error) {
+  //       if(error.response.data.error){
+  //         setErrorMessage(error.response.data.error);
 
-        }
+  //       }
          
            
-          console.error(error); 
-      }
-  };
+  //         console.error(error); 
+  //     }
+  // };
   return (
     <div className=''>
       <div className="flex flex-col w-full mt-20 items-center justify-center   bg-no-repeat" >

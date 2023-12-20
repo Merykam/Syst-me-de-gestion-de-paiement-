@@ -17,6 +17,7 @@ const Dashboard = () => {
   },[])
 
   const {appartement2, showAppartements,formData}= useAppartement();
+  console.log(appartement2);
   useEffect(()=>{
     showAppartements();
     // console.log(appartement2);

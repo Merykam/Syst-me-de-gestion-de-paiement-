@@ -75,12 +75,13 @@ const signup = async (req,res)=>{
     
             const token = jwt.sign({ userId: user }, process.env.JWT_SECRET);
             console.log(token);
+            res.cookie('token',token, {expire : new Date() + 3600000 })
+            // if(res.cookie('token',token, {expire : new Date() + 3600000 })){
 
-            if(res.cookie('token',token, {expire : new Date() + 3600000 })){
-                console.log('yess')
-            }else{
-                console.log('noooo');
-            }
+            //     console.log('yess')
+            // }else{
+            //     console.log('noooo');
+            // }
 
 
 
