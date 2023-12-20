@@ -15,11 +15,12 @@ const Dashboard = () => {
       showPaiments();
    
   },[])
-  const {appartement2, showAppartements}= useAppartement();
+
+  const {appartement2, showAppartements,formData}= useAppartement();
   useEffect(()=>{
     showAppartements();
     // console.log(appartement2);
-  },[])
+  },[formData])
 
   const [page,setPage] = useState('statistics')
 
@@ -36,14 +37,14 @@ const Dashboard = () => {
       <div className=''>
       <Sidebar to={togglePage}/>
       </div>
-      <div className='mx-auto'>
-        {page == "appartement" ?  <Appartement appartement2 = {appartement2} to={togglePage}/> : ""}
+      
+        {page == "appartement" ? <div className='mx-auto overflow-scroll'> <Appartement appartement2 = {appartement2} to={togglePage}/> </div>: ""}
        
-        {page == "paiment" ?   <Paiment paiment={paiment}/>: ""}
-        {page == "statistics" ?  <Statistics/> : ""}
-        {page == "paiments" ?  <AppartementPaiments/> : ""}
+        {page == "paiment" ? <div className='mx-auto overflow-scroll'>  <Paiment paiment={paiment}/> </div>: ""}
+        {page == "statistics" ? <div> <Statistics/></div> : ""}
+        {page == "paiments" ? <div className='mx-auto overflow-scroll'> <AppartementPaiments/> </div> : ""}
      
-      </div>
+        </div>
    
     
     </div>
@@ -52,7 +53,6 @@ const Dashboard = () => {
   
    
    
-  </div>
   )
 }
 

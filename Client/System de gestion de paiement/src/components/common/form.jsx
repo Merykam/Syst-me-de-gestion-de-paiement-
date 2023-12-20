@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function form() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const {formData,setFormData, addAppartement}= useAppartement();
+  const {formData,setFormData, addAppartement,errors}= useAppartement();
   const {showClients,client}= useClient();
  
 
@@ -51,7 +51,10 @@ const handleAppartData = (e) =>{
                   variant="bordered"
                   name="name"
                   onChange={handleInputChange}
-                />
+                  error={errors.name}
+                  />
+                        {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
+
                 <Input
                 
                   label="Description"
@@ -61,6 +64,7 @@ const handleAppartData = (e) =>{
                   name="description"
                   onChange={handleInputChange}
                 />
+                 {errors.description && <span style={{ color: 'red' }}>{errors.description}</span>}
                     <Input
                 
                 label="Rental price"
@@ -70,6 +74,8 @@ const handleAppartData = (e) =>{
                 name="prixParMois"
                 onChange={handleInputChange}
               />
+              {errors.prixParMois && <span style={{ color: 'red' }}>{errors.prixParMois}</span>}
+
                   <Input
                 
                 label="Surface"
@@ -79,6 +85,8 @@ const handleAppartData = (e) =>{
                 name="surface"
                 onChange={handleInputChange}
               />
+                            {errors.surface && <span style={{ color: 'red' }}>{errors.surface}</span>}
+
              
                   <Input
                 
@@ -89,6 +97,8 @@ const handleAppartData = (e) =>{
                 name="nombrePieces"
                 onChange={handleInputChange}
               />
+                            {errors.nombrePieces && <span style={{ color: 'red' }}>{errors.nombrePieces}</span>}
+
                 <Input
                 
                 label="Adresse"
@@ -98,7 +108,10 @@ const handleAppartData = (e) =>{
                 name="adresse"
                 onChange={handleInputChange}
               />
+                            {errors.adresse && <span style={{ color: 'red' }}>{errors.adresse}</span>}
+
              <select onChange={handleInputChange} className="border-2 rounded-2xl p-3" name="clientId" id="">
+             <option value="No client">No client</option>
               {client.map(singlClient=>(
               <option  
                 variant="bordered"
@@ -107,6 +120,9 @@ const handleAppartData = (e) =>{
                 >
                   {singlClient.name}
                   </option>
+
+                       
+
                 ))}
 
               </select>

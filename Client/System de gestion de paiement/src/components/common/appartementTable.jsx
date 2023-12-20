@@ -39,7 +39,7 @@ const  handelAppartementData=async(id)=>{
    
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css"/>
 <div class="flex flex-wrap mb-5  ">
-  <div class="px-3 mb-6  mx-auto">
+  <div class="px-3 mb-6  mx-auto ">
     <div class=" flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
       <div class=" relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
       
@@ -54,9 +54,9 @@ const  handelAppartementData=async(id)=>{
           </div>
         </div>
     
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto ">
-            <table class="align-middle text-dark border-neutral-200">
+        <div class="flex-auto block py-8 pt-6 px-9 ">
+          <div class=" ">
+            <table class="align-middle text-dark border-neutral-200 ">
               <thead class="align-bottom">
                 <tr class="font-semibold text-[0.95rem] text-secondary-dark">
                   <th class="pb-3 text-start min-w-[175px]">Name</th>

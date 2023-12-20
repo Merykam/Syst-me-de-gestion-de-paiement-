@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  server:
+    build: 
+      context: ./Server
+      dockerfile: Dockerfile
+    image: image-server 
+    container_name: server
+    ports:
+      - "8000:8000"
+    working_dir: /usr/src/app
+    command: ["npm", "run", "dev"]
+    volumes:
+      - ./Server:/usr/src/app
+      - /usr/src/app/node_modules
+
+
+  client:
+    build: 
+        context: "./Client/System de gestion de paiement"
+        dockerfile: Dockerfile
+    image: image-client 
+    container_name: client
+    ports:
+      - "5173:5173"
+    working_dir: /usr/src/app
+    command: ["npm", "run", "dev"]
+    volumes:
+      - "./Client/System de gestion de paiement:/usr/src/app"
+      - /usr/src/app/node_modules
+
+  mongodb:
+    image: mongo
+    container_name: mongodb2
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:

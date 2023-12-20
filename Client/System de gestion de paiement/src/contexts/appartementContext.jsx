@@ -12,15 +12,17 @@ const appartementContext = createContext();
 export function AppartementProvider({ children }) {
 
     const [appartement2, setAppartement]= useState('');
+    const [ errors ,setErrors] = useState({})
+
     const [get,setGet]=useState(false)
     const [appartementData, setAppartementData]= useState('');
 
     const [formData, setFormData] = useState({
       name: '',
       description: '',
-      prixParMoix: null,
-      surface:null,
-      nombrePieces:null,
+      prixParMois: '',
+      surface:'',
+      nombrePieces:'',
       adresse:'',
       status:'',
       clientId:''
@@ -29,10 +31,9 @@ export function AppartementProvider({ children }) {
 
     const [formDataUpdated, setFormDataUpdated] = useState({
       name: '',
-      description: '',
-      prixParMoix: null,
-      surface:null,
-      nombrePieces:null,
+      prixParMois: '',
+      surface:'',
+      nombrePieces:'',
       adresse:'',
       status:'',
       clientId:''
@@ -84,10 +85,85 @@ export function AppartementProvider({ children }) {
 
  
 
+  const validateForm = ()=>{
+  const error = {}
 
+  if(!formData.name.trim()){
+    error.name = 'name is required '
+  }
+  if(!formData.description.trim()){
+    error.description = 'description is required '
+  }
+  if(!formData.prixParMois.trim()){
+    error.prixParMois = 'prixParMoix is required '
+  }
+  if(!formData.surface.trim()){
+    error.surface = 'surface is required '
+  }
+  if(!formData.nombrePieces.trim()){
+    error.nombrePieces = 'nombrePieces is required '
+  }
+  if(!formData.adresse.trim()){
+    error.adresse = 'adresse is required '
+  }
+  if(!formData.status.trim()){
+    error.status = 'status is required '
+  }
+
+
+  setErrors(error)
+  console.log("hello");
+  console.log(errors);
+  
+  
+
+
+  return Object.keys(error).length === 0;
+
+
+  }
+  const validateForm2 = ()=>{
+    const error = {}
+  
+    if(!formDataUpdated.name.trim()){
+      error.name = 'name is required '
+    }
+    if(!formDataUpdated.description.trim()){
+      error.description = 'description is required '
+    }
+    if(!formDataUpdated.prixParMois.trim()){
+      error.prixParMois = 'prixParMoix is required '
+    }
+    if(!formDataUpdated.surface.trim()){
+      error.surface = 'surface is required '
+    }
+    if(!formDataUpdated.nombrePieces.trim()){
+      error.nombrePieces = 'nombrePieces is required '
+    }
+    if(!formDataUpdated.adresse.trim()){
+      error.adresse = 'adresse is required '
+    }
+    if(!formDataUpdated.status.trim()){
+      error.status = 'status is required '
+    }
+  
+  
+    setErrors(error)
+    console.log("hello");
+    console.log(errors);
+    
+    
+  
+  
+    return Object.keys(error).length === 0;
+  
+  
+    }
   const addAppartement = async () => {
     
-
+  if (!validateForm()){
+    return ;
+  }
     try {
         console.log(formData)
         const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData);
@@ -106,7 +182,9 @@ export function AppartementProvider({ children }) {
 };
 
 const updateAppartement = async (id)=>{
-  
+  // if (!validateForm2()){
+  //   return ;
+  // }
   try {
     console.log(formDataUpdated)
     const response = await axios.post(`http://localhost:8000/api/appartement/updateAppartement?id=${id}`, formDataUpdated);
@@ -136,7 +214,8 @@ const updateAppartement = async (id)=>{
         editAppartement,
         updateAppartement,
         formDataUpdated,
-        setFormDataUpdated
+        setFormDataUpdated,
+        errors,
   
       }}
     >

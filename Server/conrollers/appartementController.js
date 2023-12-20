@@ -107,22 +107,25 @@ const showAppartement = async(req,res)=>{
 }
 const editAppartement = async(req,res)=>{
     const id = req.query.id;
-    const appartementData = await Appartement.find({_id:id})
+    const appartementData = await Appartement.find({_id:id}).populate({
+        path: "clientId",
+        module: "client",
+        select: "name"
+    })
     return res.status(200).json({ success: true, appartementData: appartementData })
 
 }
 
 const updateAppartement = async (req,res)=>{
 
-    const {id}=req.query
-    console.log(id);
-  
+    const appartementID= req.query.id
+  console.log("id for appart " , appartementID);
     const { name, description, prixParMois, surface, nombrePieces, adresse, status, clientId} = req.body;
     try{
-        console.log("hello");
-        const existingAppartement = await Appartement.findOne({ adresse : adresse});
-        const appartName = await Appartement.findOne({name :name});
-        const findId = await Appartement.findOne({_id:id})
+        // console.log("hello");
+        // const existingAppartement = await Appartement.findOne({ adresse : adresse});
+        // const appartName = await Appartement.findOne({name :name});
+        // const findId = await Appartement.findOne({_id:id})
      
 
         // if (!findId && (existingAppartement || appartName)) {
@@ -130,17 +133,41 @@ const updateAppartement = async (req,res)=>{
         // }
 
         const client1 = await client.findOne({ name :clientId });
-        const clientId1 = client1._id;
-        const updateAppartement =await Appartement.findByIdAndUpdate(id,{$set:{
+       
+
+
+
+        if (!client1) {
+                
+        const updateAppartement =await Appartement.findByIdAndUpdate(
+            {_id :appartementID},
+            {
             name: req.body.name,
-            description: req.body.description,
+            prixParMois: req.body.prixParMois,
+            surface: req.body.surface,
+            nombrePieces: req.body.nombrePieces,
+            adresse: req.body.adresse,
+            status: req.body.status,
+            clientId: null,
+        },  {new:true});
+     
+
+        return res.json({ success: updateAppartement, message: 'Appartement updated successfully' });
+            
+        }
+        const clientId1 = client1._id;
+
+        const updateAppartement =await Appartement.findByIdAndUpdate(
+            {_id :appartementID},
+            {
+            name: req.body.name,
             prixParMois: req.body.prixParMois,
             surface: req.body.surface,
             nombrePieces: req.body.nombrePieces,
             adresse: req.body.adresse,
             status: req.body.status,
             clientId: clientId1,
-        }});
+        },  {new:true});
      
 
         return res.json({ success: updateAppartement, message: 'Appartement updated successfully' });
