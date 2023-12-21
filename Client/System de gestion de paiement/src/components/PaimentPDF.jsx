@@ -56,12 +56,12 @@ const PaymentPDF = ({ payment }) => {
             <Text style={styles.sectionContent}>{payment._id}</Text>
           </View>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Client ID: </Text>
-            <Text style={styles.sectionContent}>{payment.clientId._id}</Text>
+            <Text style={styles.sectionTitle}>Client name: </Text>
+            <Text style={styles.sectionContent}>{payment.clientId.name}</Text>
           </View>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Apartment ID: </Text>
-            <Text style={styles.sectionContent}>{payment.appartementId._id}</Text>
+            <Text style={styles.sectionTitle}>Apartment name: </Text>
+            <Text style={styles.sectionContent}>{payment.appartementId.name}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Date: </Text>

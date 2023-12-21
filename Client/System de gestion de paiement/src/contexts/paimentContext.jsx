@@ -13,6 +13,7 @@ export function PaimentProvider({ children }) {
 
     const [paiment, setPaiments]= useState('');
     const [paimentsAppartement, setPaimentsAppartement]= useState('');
+    const [inserted2, setInserted] = useState(false)
 
     const [formData, setFormData] = useState({
         appartementId:"",
@@ -31,6 +32,7 @@ export function PaimentProvider({ children }) {
         setPaiments(response.data.appartementPaiments)
       
         console.log(response.data.appartementPaiments);
+
     
 
 
@@ -67,11 +69,7 @@ export function PaimentProvider({ children }) {
     try {
         console.log(formData)
         const response = await axios.post('http://localhost:8000/api/paiment/insertPaiment', formData,{ withCredentials: true });
-       
-        // if(response.data.message){
-        //     setSuccessMessage(response.data.message)
-        // }
-    
+        setInserted(!inserted2)
 
 
     } catch (error) {
@@ -92,7 +90,8 @@ export function PaimentProvider({ children }) {
         setFormData,
         formData,
         showPaimentsOfAppartement,
-        paimentsAppartement
+        paimentsAppartement,
+        inserted2
    
   
       }}

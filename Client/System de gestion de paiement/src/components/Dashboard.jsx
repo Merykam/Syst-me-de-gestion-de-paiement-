@@ -11,12 +11,12 @@ import AppartementPaiments from './AppartementPaiments'
 import Client from './Client'
 
 const Dashboard = () => {
-  const {showPaiments,paiment}= usePaiment();
+  const {showPaiments,paiment,inserted2}= usePaiment();
   const {inserted}=useAppartement()
   useEffect(()=>{
       showPaiments();
    
-  },[])
+  },[inserted2])
 
   const {appartement2, showAppartements,formData}= useAppartement();
   useEffect(()=>{

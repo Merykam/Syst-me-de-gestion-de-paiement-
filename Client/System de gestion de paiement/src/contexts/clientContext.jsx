@@ -11,6 +11,7 @@ const clientContext = createContext();
 export function ClientProvider({ children }) {
 
     const [client, setClient]= useState('');
+    const [inserted, setInserted] = useState(false)
     
     const [FormData,setFormData]=useState({
       name:"",
@@ -44,7 +45,8 @@ export function ClientProvider({ children }) {
     console.log(FormData);
         const response = await axios.post('http://localhost:8000/api/client/insertClient',FormData);
         
-      
+        setInserted(!inserted)
+
         console.log(response.data);
     
 
@@ -68,7 +70,8 @@ export function ClientProvider({ children }) {
         setClient,
         addClient,
         FormData,
-        setFormData
+        setFormData,
+        inserted
        
    
   

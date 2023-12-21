@@ -196,11 +196,7 @@ export function AppartementProvider({ children }) {
         console.log(formData)
         const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData,{ withCredentials: true });
         setInserted(!inserted)
-        console.log('hhhh');
-       
-        // if(response.data.message){
-        //     setSuccessMessage(response.data.message)
-        // }
+    
     
 
 

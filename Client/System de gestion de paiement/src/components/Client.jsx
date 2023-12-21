@@ -6,10 +6,10 @@ const Client = () => {
 
  
  
-  const {client,showClients}=useClient();
+  const {client,showClients,inserted}=useClient();
   useEffect(()=>{
     showClients()
-  },[])
+  },[inserted])
   console.log(client);
   return (
     <div className=''>
