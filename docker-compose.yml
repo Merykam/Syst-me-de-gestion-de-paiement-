@@ -30,13 +30,3 @@ services:
       - "./Client/System de gestion de paiement:/usr/src/app"
       - /usr/src/app/node_modules
 
-  mongodb:
-    image: mongo
-    container_name: mongodb2
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb-data:/data/db
-
-volumes:
-  mongodb-data:

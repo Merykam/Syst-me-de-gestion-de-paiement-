@@ -36,7 +36,7 @@ app.use(cors({
     credentials : true
 }))
 
-
+ 
 app.use('/api/auth',userRoute);
 app.use('/api/client',clientRoute);
 app.use('/api/appartement',appartementRoute);

@@ -4,9 +4,8 @@ import { useClient } from '../contexts/clientContext'
 
 const Client = () => {
 
- 
- 
   const {client,showClients,inserted}=useClient();
+
   useEffect(()=>{
     showClients()
   },[inserted])

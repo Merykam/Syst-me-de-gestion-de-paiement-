@@ -23,7 +23,7 @@ const signup = async (req,res)=>{
         }
     
         if (!validator.isStrongPassword(password, { min: 6 })) {
-            return res.status(400).json({ error: 'Le mot de passe doit avoir au moins 6 caractères.' });
+            return res.status(400).json({ error: 'Le mot de passe doit être fort.' });
         }
 
       

@@ -111,7 +111,7 @@ const handleAppartData = (e) =>{
 
              <select onChange={handleInputChange} className="border-2 rounded-2xl p-3" name="clientId" id="">
              <option value="No client">No client</option>
-              {client.map(singlClient=>(
+              {client && client?.map(singlClient=>(
               <option  
                 variant="bordered"
                 

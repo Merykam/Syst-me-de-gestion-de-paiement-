@@ -6,6 +6,7 @@ import {
   View,
   PDFViewer,
 } from "@react-pdf/renderer";
+
 import { useEffect } from "react";
 
 const PaymentPDF = ({ payment }) => {
@@ -53,26 +54,26 @@ const PaymentPDF = ({ payment }) => {
           <Text style={styles.header}>Payment Details</Text>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Payment ID: </Text>
-            <Text style={styles.sectionContent}>{payment._id}</Text>
+            <Text style={styles.sectionContent}>{payment?._id}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Client name: </Text>
-            <Text style={styles.sectionContent}>{payment.clientId.name}</Text>
+            <Text style={styles.sectionContent}>{payment?.clientId?.name}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Apartment name: </Text>
-            <Text style={styles.sectionContent}>{payment.appartementId.name}</Text>
+            <Text style={styles.sectionContent}>{payment?.appartementId.name}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Date: </Text>
-            <Text style={styles.sectionContent}>{new Date(payment.date).toLocaleDateString()}</Text>
+            <Text style={styles.sectionContent}>{new Date(payment?.date).toLocaleDateString()}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Price Per Month: </Text>
-            <Text style={styles.sectionContent}>${payment.prixParMois}</Text>
+            <Text style={styles.sectionContent}>${payment?.prixParMois}</Text>
           </View>
           <View style={styles.totalAmount}>
-            <Text>Total: ${payment.prixParMois}</Text>
+            <Text>Total: ${payment?.prixParMois}</Text>
           </View>
         </Page>
       </Document>
