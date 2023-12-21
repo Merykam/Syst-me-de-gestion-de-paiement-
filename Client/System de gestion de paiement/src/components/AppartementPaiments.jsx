@@ -3,15 +3,28 @@ import { useEffect , useState } from 'react';
 import PaimentForm from './common/paimentForm'
 import appartement from "../assets/appartement.jpg"
 import { usePaiment } from '../contexts/paimentContext';
+import PaymentPDF from './PaimentPDF';
 
 
 const AppartementPaiments = () => {
     const {paimentsAppartement}= usePaiment();
     console.log(paimentsAppartement);
+   const [paimentToPrint, setPaimentToPrint] = useState(null);
+    const [paiment,setPaiment] = useState(null)
    
+   useEffect(()=>{
+    if(paimentToPrint){
+      let p = paimentsAppartement.find(item => item._id == paimentToPrint)
+      setPaiment(p)
+    }
+   },[paimentToPrint])
   return (
 
-    <div>
+    <div className='relative'>
+ {paiment &&<div className='absolute z-50 bg-white w-full p-8 top-8 rounded-xl flex flex-col'>
+    <button className='ms-auto w-max px-3 py-1 bg-green-700 text-white mb-2 ' onClick={()=>{setPaiment(null);setPaimentToPrint(null);}}>close</button>
+  <PaymentPDF payment={paiment}/>
+ </div>}
  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css"/>
 <div class="flex flex-wrap -mx-3 mb-5">
@@ -69,7 +82,7 @@ const AppartementPaiments = () => {
                     <span class="text-center align-baseline inline-flex px-4 py-3 mr-auto items-center font-semibold text-[.95rem] leading-none  rounded-lg"> {paim2?.date} </span>
                   </td>
                   <td class="p-3 pr-0 text-end">
-                    <button class="rounded-2xl text-success bg-success-light font-bold  ml-auto flex items-center p-3 text-md  leading-normal text-center  cursor-pointer  transition-tion-200 ease-in-out shadow-none border-0 justify-center">
+                    <button onClick={()=>setPaimentToPrint(paim2?._id)} class="rounded-2xl text-success bg-success-light font-bold  ml-auto flex items-center p-3 text-md  leading-normal text-center  cursor-pointer  transition-tion-200 ease-in-out shadow-none border-0 justify-center">
                      
                       Printed invoice
                    

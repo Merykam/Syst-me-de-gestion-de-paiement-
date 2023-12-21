@@ -16,17 +16,16 @@ export default function form() {
 const handleInputChange = (e) => {
    
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData)
   };
 useEffect(()=>{
   showClients();
-  console.log(client);
 },[])
 
 
 const handleAppartData = (e) =>{
   e.preventDefault();
   addAppartement();
+
 
 }
 

@@ -13,6 +13,11 @@ export function AppartementProvider({ children }) {
 
     const [appartement2, setAppartement]= useState('');
     const [ errors ,setErrors] = useState({})
+    const [inserted, setInserted] = useState(false)
+    
+    const handleModalClose = () => {
+      setModalOpen(false);
+    };
 
     const [get,setGet]=useState(false)
     const [appartementData, setAppartementData]= useState('');
@@ -190,6 +195,8 @@ export function AppartementProvider({ children }) {
     try {
         console.log(formData)
         const response = await axios.post('http://localhost:8000/api/appartement/addAppartement', formData,{ withCredentials: true });
+        setInserted(!inserted)
+        console.log('hhhh');
        
         // if(response.data.message){
         //     setSuccessMessage(response.data.message)
@@ -212,6 +219,7 @@ const updateAppartement = async (id)=>{
     console.log(formDataUpdated)
     const response = await axios.post(`http://localhost:8000/api/appartement/updateAppartement?id=${id}`, formDataUpdated, { withCredentials: true });
     console.log(response.data);
+    setInserted(!inserted)
    
 
 
@@ -229,7 +237,7 @@ const deleteAppartement = async (id)=>{
   
     const response = await axios.post(`http://localhost:8000/api/appartement/deleteAppartement?id=${id}`, { withCredentials: true });
     console.log(response.data.message);
-   
+   setInserted(!inserted)
 
 
 
@@ -258,7 +266,9 @@ const deleteAppartement = async (id)=>{
         errors,
         showRentedAppartements,
         rentedAppartement,
-        deleteAppartement
+        deleteAppartement,
+        setInserted,
+        inserted
   
       }}
     >

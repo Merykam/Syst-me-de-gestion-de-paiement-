@@ -6,7 +6,6 @@ import appartement from "../assets/appartement.jpg"
 
 const paiment = ({paiment}) => {
     console.log(paiment);
-   
   return (
     <div className=''>
  
